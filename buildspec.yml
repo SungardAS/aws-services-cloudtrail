@@ -1,0 +1,19 @@
+version: 0.1
+phases:
+  install:
+    commands:
+      - npm install time
+      - npm install
+      - ./node_modules/.bin/replace '__aws_region' $AWS_DEFAULT_REGION ./swagger.yaml
+      - ./node_modules/.bin/replace '__aws_account' $AWS_ACCOUNT_ID ./swagger.yaml
+      - ./node_modules/.bin/replace '__aws_auth_lambda' $AWS_AUTHORIZER_LAMBDA_ARN ./swagger.yaml
+      - ./node_modules/.bin/replace '__aws_auth_role' $AWS_AUTHORIZER_IAM_ROLE_ARN ./swagger.yaml
+      - cd src; npm install; cd ..
+      - aws cloudformation package
+         --template-file template.yaml
+         --s3-bucket $S3_BUCKET_NAME
+         --output-template-file samTemplate.yaml
+artifacts:
+  type: zip
+  files:
+    - samTemplate.yaml
