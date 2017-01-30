@@ -51,7 +51,7 @@ paths:
         responses:
           default:
             statusCode: "200"
-        uri: "arn:aws:apigateway:__aws_region:lambda:path/2015-03-31/functions/arn:aws:lambda:__aws_region:__aws_account:function:${stageVariables.LambdaFunctionName}/invocations"
+        uri: "arn:aws:apigateway:AWS::REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:AWS::REGION:AWS::ACCOUNT_ID:function:${stageVariables.LambdaFunctionName}/invocations"
         passthroughBehavior: "when_no_match"
         httpMethod: "POST"
         cacheNamespace: "u9k6f6"
@@ -66,9 +66,9 @@ securityDefinitions:
     in: "header"
     x-amazon-apigateway-authtype: "custom"
     x-amazon-apigateway-authorizer:
-      authorizerCredentials: "__aws_auth_role"
+      authorizerCredentials: "arn:aws:iam::AWS::ACCOUNT_ID:role/AWS::CUSTOM_AUTHORIZER_ROLE_NAME"
       authorizerResultTtlInSeconds: 300
-      authorizerUri: "arn:aws:apigateway:__aws_region:lambda:path/2015-03-31/functions/__aws_auth_lambda/invocations"
+      authorizerUri: "arn:aws:apigateway:AWS::REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:AWS::REGION:AWS::ACCOUNT_ID:function:AWS::CUSTOM_AUTHORIZER_LAMBDA_NAME/invocations"
       type: "token"
 definitions:
   Empty:

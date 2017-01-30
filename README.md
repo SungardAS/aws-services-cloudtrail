@@ -60,11 +60,21 @@ data:
 
 ## How To Setup a CodePipeline
 
-Please see here, https://github.com/SungardAS/aws-services-federation#how-to-setup-a-codepipeline, and add below environment variables in CodeBuild
+<a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=ServerlessCodePipeline&amp;templateURL=https://s3.amazonaws.com/cloudformation-serverless-codepipeline.us-east-1/codepipeline.yaml"><img src="https://camo.githubusercontent.com/210bb3bfeebe0dd2b4db57ef83837273e1a51891/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f636c6f7564666f726d6174696f6e2d6578616d706c65732f636c6f7564666f726d6174696f6e2d6c61756e63682d737461636b2e706e67" alt="Launch Stack" data-canonical-src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png" /></a>
 
-  > AWS_AUTHORIZER_LAMBDA_ARN : ARN of Custom Authorizer Lambda Function
+Input Parameter Values
 
-  > AWS_AUTHORIZER_IAM_ROLE_ARN : ARN of IAM Role that enables Custom Authorizer to be invoked
+- CloudformationLambdaExecutionRoleArn: *role_arn* (See <a href="https://s3.amazonaws.com/cloudformation-serverless-codepipeline.us-east-1/roles/role_cloudformation-lambda-execution-role.json">here</a> for Trust Relationships and Policy Document)
+- CodePipelineServiceRoleArn: *role_arn*  (See <a href="https://s3.amazonaws.com/cloudformation-serverless-codepipeline.us-east-1/roles/role_AWS-CodePipeline-Service.json">here</a> for Trust Relationships and Policy Document)
+- CustomAuthorizerIAMRoleName:*custom_authorizer_role_name*  (See <a href="https://s3.amazonaws.com/cloudformation-serverless-codepipeline.us-east-1/roles/role_apigateway-lambda-execution-role.json">here</a> for Trust Relationships and Policy Document)
+- CustomAuthorizerLambdaName: *custom_authorizer_lambda_function_name* (See <a href="https://github.com/SungardAS/aws-services-authorizer">here</a> for the Lambda Function Project for Custom Authorizer)
+- EncryptionLambdaName:
+- GitHubPersonalAccessToken: *access_token* (See <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use/">here</a> to find how to genernate the access token)
+- GitHubSourceRepositoryBranch: master
+- GitHubSourceRepositoryName: aws-services-cloudtrail
+- GitHubSourceRepositoryOwner: SungardAS
+- ParameterOverrides:
+- ProjectImage: aws/codebuild/nodejs:4.3.2
 
 ## How To Test Lambda Functions
 
