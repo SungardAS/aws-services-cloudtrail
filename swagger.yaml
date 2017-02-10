@@ -39,7 +39,7 @@ paths:
           application/json: "{\n  \"path\": \"/cloudtrail\",\n  \"httpMethod\": \"\
             GET\",\n  \"headers\": {\n    \"Credentials\": \"$input.params().header.get('Credentials')\"\
             \n  },\n  \"queryStringParameters\": {\"region\":\"$input.params('region')\"\
-            },\n  \"retType\": \"json\"\
+            },\n  \"resType\": \"json\"\
             \n}"
         uri: "arn:aws:apigateway:AWS::REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:AWS::REGION:AWS::ACCOUNT_ID:function:${stageVariables.LambdaFunctionName}/invocations"
         passthroughBehavior: "when_no_templates"
@@ -74,7 +74,7 @@ paths:
         requestTemplates:
           application/json: "{\n  \"path\": \"/cloudtrail\",\n  \"httpMethod\": \"\
             POST\",\n  \"headers\": {\n    \"Credentials\": \"$input.params().header.get('Credentials')\"\
-            \n  },\n  \"body\": {\"region\":\"$input.path('$').region\"},\n  \"retType\": \"json\"\
+            \n  },\n  \"body\": {\"region\":\"$input.path('$').region\"},\n  \"resType\": \"json\"\
             \n}"
         uri: "arn:aws:apigateway:AWS::REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:AWS::REGION:AWS::ACCOUNT_ID:function:${stageVariables.LambdaFunctionName}/invocations"
         passthroughBehavior: "when_no_templates"
@@ -113,7 +113,7 @@ paths:
         requestTemplates:
           application/json: "{\n  \"path\": \"/cloudtrail\",\n  \"httpMethod\": \"\
             DELETE\",\n  \"headers\": {\n    \"Credentials\": \"$input.params().header.get('Credentials')\"\
-            \n  },\n  \"body\": {\"region\":\"$input.path('$').region\"},\n  \"retType\": \"json\"\
+            \n  },\n  \"body\": {\"region\":\"$input.path('$').region\"},\n  \"resType\": \"json\"\
             \n}"
         uri: "arn:aws:apigateway:AWS::REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:AWS::REGION:AWS::ACCOUNT_ID:function:${stageVariables.LambdaFunctionName}/invocations"
         passthroughBehavior: "when_no_templates"
