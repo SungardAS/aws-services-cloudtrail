@@ -2,7 +2,7 @@
 swagger: "2.0"
 info:
   version: "2017-01-10T20:57:23Z"
-  title: "Clone from Cloudtrail API Interfaces"
+  title: "Cloudtrail API Interfaces"
 schemes:
 - "https"
 paths:
