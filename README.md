@@ -20,7 +20,7 @@ const Credentials = {
 path: /cloudtrail?region=<<region>>
 method : GET
 headers: {
-  "Credentials": JSON.stringify(Credentials),
+  "Credentials": base64_encoded_Credentials_String,
 }
 ```
 ### To enable the services
@@ -33,7 +33,7 @@ Credentials = {
 path: /cloudtrail
 method : POST
 headers: {
-  "Credentials": JSON.stringify(Credentials),
+  "Credentials": base64_encoded_Credentials_String,
 }
 data:
 {
@@ -50,7 +50,7 @@ Credentials = {
 path: /cloudtrail
 method : DELETE
 headers: {
-  "Credentials": JSON.stringify(Credentials),
+  "Credentials": base64_encoded_Credentials_String,
 }
 data:
 {
