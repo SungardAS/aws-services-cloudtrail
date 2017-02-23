@@ -44,7 +44,6 @@ paths:
         uri: "arn:aws:apigateway:AWS::REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:AWS::REGION:AWS::ACCOUNT_ID:function:${stageVariables.LambdaFunctionName}/invocations"
         passthroughBehavior: "when_no_templates"
         httpMethod: "POST"
-        credentials: "arn:aws:iam::AWS::ACCOUNT_ID:role/AWS::APIGATEWAY_INVOKE_LAMBDA_ROLE_NAME"
         contentHandling: "CONVERT_TO_TEXT"
         type: "aws"
     post:
@@ -79,7 +78,6 @@ paths:
         uri: "arn:aws:apigateway:AWS::REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:AWS::REGION:AWS::ACCOUNT_ID:function:${stageVariables.LambdaFunctionName}/invocations"
         passthroughBehavior: "when_no_templates"
         httpMethod: "POST"
-        credentials: "arn:aws:iam::AWS::ACCOUNT_ID:role/AWS::APIGATEWAY_INVOKE_LAMBDA_ROLE_NAME"
         contentHandling: "CONVERT_TO_TEXT"
         type: "aws"
     delete:
@@ -118,7 +116,6 @@ paths:
         uri: "arn:aws:apigateway:AWS::REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:AWS::REGION:AWS::ACCOUNT_ID:function:${stageVariables.LambdaFunctionName}/invocations"
         passthroughBehavior: "when_no_templates"
         httpMethod: "POST"
-        credentials: "arn:aws:iam::AWS::ACCOUNT_ID:role/AWS::APIGATEWAY_INVOKE_LAMBDA_ROLE_NAME"
         contentHandling: "CONVERT_TO_TEXT"
         type: "aws"
     options:
