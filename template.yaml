@@ -79,7 +79,7 @@ Resources:
           Type: Api
           Properties:
             RestApiId: !Ref ApiGatewayApi
-            Path: /{proxy+}
+            Path: /cloudtrail
             Method: ANY
 
 Outputs:
