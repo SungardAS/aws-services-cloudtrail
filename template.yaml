@@ -8,153 +8,8 @@ Resources:
     Properties:
       DefinitionUri: ./swagger.yaml
       StageName: Prod
-      DefinitionBody:
-        swagger: 2.0
-        info:
-          title:
-            Ref: AWS::StackName
-        paths:
-          /cloudtrail:
-            get:
-              consumes:
-              - "application/json"
-              produces:
-              - "application/json"
-              parameters:
-              - name: "Credentials"
-                in: "header"
-                required: false
-                type: "string"
-              - name: "region"
-                in: "query"
-                required: false
-                type: "string"
-              responses:
-                200:
-                  description: "200 response"
-                  schema:
-                    $ref: "#/definitions/Empty"
-                  headers:
-                    Access-Control-Allow-Origin:
-                      type: "string"
-              x-amazon-apigateway-integration:
-                responses:
-                  default:
-                    statusCode: "200"
-                    responseParameters:
-                      method.response.header.Access-Control-Allow-Origin: "'*'"
-                requestTemplates:
-                  application/json: "{\n  \"path\": \"/cloudtrail\",\n  \"httpMethod\": \"\
-                    GET\",\n  \"headers\": {\n    \"Credentials\": \"$input.params().header.get('Credentials')\"\
-                    \n  },\n  \"queryStringParameters\": {\"region\":\"$input.params('region')\"\
-                    },\n  \"resType\": \"json\"\
-                    \n}"
-                uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaFunction.Arn}/invocations"
-                passthroughBehavior: "when_no_templates"
-                httpMethod: "POST"
-                contentHandling: "CONVERT_TO_TEXT"
-                type: "aws"
-            post:
-              consumes:
-              - "application/json"
-              produces:
-              - "application/json"
-              parameters:
-              - name: "Credentials"
-                in: "header"
-                required: false
-                type: "string"
-              responses:
-                200:
-                  description: "200 response"
-                  schema:
-                    $ref: "#/definitions/Empty"
-                  headers:
-                    Access-Control-Allow-Origin:
-                      type: "string"
-              x-amazon-apigateway-integration:
-                responses:
-                  default:
-                    statusCode: "200"
-                    responseParameters:
-                      method.response.header.Access-Control-Allow-Origin: "'*'"
-                requestTemplates:
-                  application/json: "{\n  \"path\": \"/cloudtrail\",\n  \"httpMethod\": \"\
-                    POST\",\n  \"headers\": {\n    \"Credentials\": \"$input.params().header.get('Credentials')\"\
-                    \n  },\n  \"body\": {\"region\":\"$input.path('$').region\"},\n  \"resType\": \"json\"\
-                    \n}"
-                uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaFunction.Arn}/invocations"
-                passthroughBehavior: "when_no_templates"
-                httpMethod: "POST"
-                contentHandling: "CONVERT_TO_TEXT"
-                type: "aws"
-            delete:
-              consumes:
-              - "application/json"
-              produces:
-              - "application/json"
-              parameters:
-              - name: "Credentials"
-                in: "header"
-                required: false
-                type: "string"
-              - name: "region"
-                in: "query"
-                required: false
-                type: "string"
-              responses:
-                200:
-                  description: "200 response"
-                  schema:
-                    $ref: "#/definitions/Empty"
-                  headers:
-                    Access-Control-Allow-Origin:
-                      type: "string"
-              x-amazon-apigateway-integration:
-                responses:
-                  default:
-                    statusCode: "200"
-                    responseParameters:
-                      method.response.header.Access-Control-Allow-Origin: "'*'"
-                requestTemplates:
-                  application/json: "{\n  \"path\": \"/cloudtrail\",\n  \"httpMethod\": \"\
-                    DELETE\",\n  \"headers\": {\n    \"Credentials\": \"$input.params().header.get('Credentials')\"\
-                    \n  },\n  \"body\": {\"region\":\"$input.path('$').region\"},\n  \"resType\": \"json\"\
-                    \n}"
-                uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaFunction.Arn}/invocations"
-                passthroughBehavior: "when_no_templates"
-                httpMethod: "POST"
-                contentHandling: "CONVERT_TO_TEXT"
-                type: "aws"
-            options:
-              consumes:
-              - "application/json"
-              produces:
-              - "application/json"
-              responses:
-                200:
-                  description: "200 response"
-                  schema:
-                    $ref: "#/definitions/Empty"
-                  headers:
-                    Access-Control-Allow-Origin:
-                      type: "string"
-                    Access-Control-Allow-Methods:
-                      type: "string"
-                    Access-Control-Allow-Headers:
-                      type: "string"
-              x-amazon-apigateway-integration:
-                responses:
-                  default:
-                    statusCode: "200"
-                    responseParameters:
-                      method.response.header.Access-Control-Allow-Methods: "'DELETE,POST,GET,OPTIONS'"
-                      method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Credentials'"
-                      method.response.header.Access-Control-Allow-Origin: "'*'"
-                requestTemplates:
-                  application/json: "{\"statusCode\": 200}"
-                passthroughBehavior: "when_no_match"
-                type: "mock"
+      Variables:
+        LambdaFunctionName: !Ref LambdaFunction
 
   LambdaFunctionIAMRole:
       Type: "AWS::IAM::Role"
@@ -208,6 +63,7 @@ Resources:
   LambdaFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: SungardAS-CloudTrail
       Handler: index.handler
       Runtime: nodejs4.3
       CodeUri: ./src
