@@ -14,14 +14,14 @@ const body = {
   "region": ""
 };
 
-event = {
+var event = {
   "path": "/cloudtrail",
   "httpMethod": "POST",
   "headers": {
-    "Credentials": new Buffer(JSON.stringify(Credentials)).toString('base64')
+    "credentials": new Buffer(JSON.stringify(Credentials)).toString('base64')
   },
-  "body": JSON.stringify(body),
-  "resType": "json"
+  "queryStringParameters": null,
+  "body": JSON.stringify(body)
 }
 
 var i = require('../src/index.js');

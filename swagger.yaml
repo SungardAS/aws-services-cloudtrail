@@ -6,20 +6,77 @@ info:
 schemes:
 - "https"
 paths:
-  /cloudtrail:
-    get:
+  /{proxy+}:
+    options:
       consumes:
       - "application/json"
       produces:
       - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+        401:
+          description: "401 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+        403:
+          description: "403 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'DELETE,POST,GET,PUT,OPTIONS,PATCH,HEAD'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          not permitted.*:
+            statusCode: "401"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          unauthorized.*:
+            statusCode: "403"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+    x-amazon-apigateway-any-method:
+      produces:
+      - "application/json"
       parameters:
-      - name: "Credentials"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "region"
-        in: "query"
-        required: false
+      - name: "proxy"
+        in: "path"
+        required: true
         type: "string"
       responses:
         200:
@@ -29,95 +86,52 @@ paths:
           headers:
             Access-Control-Allow-Origin:
               type: "string"
-      x-amazon-apigateway-integration:
-        responses:
-          default:
-            statusCode: "200"
-            responseParameters:
-              method.response.header.Access-Control-Allow-Origin: "'*'"
-        requestTemplates:
-          application/json: "{\n  \"path\": \"/cloudtrail\",\n  \"httpMethod\": \"\
-            GET\",\n  \"headers\": {\n    \"Credentials\": \"$input.params().header.get('Credentials')\"\
-            \n  },\n  \"queryStringParameters\": {\"region\":\"$input.params('region')\"\
-            },\n  \"resType\": \"json\"\
-            \n}"
-        uri: "arn:aws:apigateway:AWS::REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:AWS::REGION:AWS::ACCOUNT_ID:function:${stageVariables.LambdaFunctionName}/invocations"
-        passthroughBehavior: "when_no_templates"
-        httpMethod: "POST"
-        contentHandling: "CONVERT_TO_TEXT"
-        type: "aws"
-    post:
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "Credentials"
-        in: "header"
-        required: false
-        type: "string"
-      responses:
-        200:
-          description: "200 response"
+        401:
+          description: "401 response"
           schema:
             $ref: "#/definitions/Empty"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
-      x-amazon-apigateway-integration:
-        responses:
-          default:
-            statusCode: "200"
-            responseParameters:
-              method.response.header.Access-Control-Allow-Origin: "'*'"
-        requestTemplates:
-          application/json: "{\n  \"path\": \"/cloudtrail\",\n  \"httpMethod\": \"\
-            POST\",\n  \"headers\": {\n    \"Credentials\": \"$input.params().header.get('Credentials')\"\
-            \n  },\n  \"body\": {\"region\":\"$input.path('$').region\"},\n  \"resType\": \"json\"\
-            \n}"
-        uri: "arn:aws:apigateway:AWS::REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:AWS::REGION:AWS::ACCOUNT_ID:function:${stageVariables.LambdaFunctionName}/invocations"
-        passthroughBehavior: "when_no_templates"
-        httpMethod: "POST"
-        contentHandling: "CONVERT_TO_TEXT"
-        type: "aws"
-    delete:
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "Credentials"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "region"
-        in: "query"
-        required: false
-        type: "string"
-      responses:
-        200:
-          description: "200 response"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+        403:
+          description: "403 response"
           schema:
             $ref: "#/definitions/Empty"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+      security:
+      - SSOAuthorizer: []
       x-amazon-apigateway-integration:
         responses:
           default:
             statusCode: "200"
             responseParameters:
               method.response.header.Access-Control-Allow-Origin: "'*'"
-        requestTemplates:
-          application/json: "{\n  \"path\": \"/cloudtrail\",\n  \"httpMethod\": \"\
-            DELETE\",\n  \"headers\": {\n    \"Credentials\": \"$input.params().header.get('Credentials')\"\
-            \n  },\n  \"body\": {\"region\":\"$input.path('$').region\"},\n  \"resType\": \"json\"\
-            \n}"
+          not permitted.*:
+            statusCode: "401"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          unauthorized.*:
+            statusCode: "403"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
         uri: "arn:aws:apigateway:AWS::REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:AWS::REGION:AWS::ACCOUNT_ID:function:${stageVariables.LambdaFunctionName}/invocations"
-        passthroughBehavior: "when_no_templates"
+        passthroughBehavior: "when_no_match"
         httpMethod: "POST"
+        cacheNamespace: "u9k6f6"
+        cacheKeyParameters:
+        - "method.request.path.proxy"
         contentHandling: "CONVERT_TO_TEXT"
-        type: "aws"
+        type: "aws_proxy"
     options:
       consumes:
       - "application/json"
@@ -147,6 +161,17 @@ paths:
           application/json: "{\"statusCode\": 200}"
         passthroughBehavior: "when_no_match"
         type: "mock"
+securityDefinitions:
+  SSOAuthorizer:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+    x-amazon-apigateway-authtype: "custom"
+    x-amazon-apigateway-authorizer:
+      authorizerCredentials: "arn:aws:iam::AWS::ACCOUNT_ID:role/AWS::CUSTOM_AUTHORIZER_ROLE_NAME"
+      authorizerResultTtlInSeconds: 300
+      authorizerUri: "arn:aws:apigateway:AWS::REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:AWS::REGION:AWS::ACCOUNT_ID:function:AWS::CUSTOM_AUTHORIZER_LAMBDA_NAME/invocations"
+      type: "token"
 definitions:
   Empty:
     type: "object"

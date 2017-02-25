@@ -16,11 +16,11 @@ baseHandler.get = function(params, callback) {
     trailName: trailName
   };
   if (params.region) input['region'] = params.region;
-  if (params.Credentials) {
+  if (params.credentials) {
     input['creds'] = new AWS.Credentials({
-      accessKeyId: params.Credentials.AccessKeyId,
-      secretAccessKey: params.Credentials.SecretAccessKey,
-      sessionToken: params.Credentials.SessionToken
+      accessKeyId: params.credentials.AccessKeyId,
+      secretAccessKey: params.credentials.SecretAccessKey,
+      sessionToken: params.credentials.SessionToken
     });
   }
 
@@ -47,10 +47,10 @@ baseHandler.post = function(params, callback) {
   var input = {};
   //if (params.multiRegion)  input.multiRegion = params.multiRegion;
   if (params.region) input['region'] = params.region;
-  if (params.Credentials) input['creds'] = new AWS.Credentials({
-    accessKeyId: params.Credentials.AccessKeyId,
-    secretAccessKey: params.Credentials.SecretAccessKey,
-    sessionToken: params.Credentials.SessionToken
+  if (params.credentials) input['creds'] = new AWS.Credentials({
+    accessKeyId: params.credentials.AccessKeyId,
+    secretAccessKey: params.credentials.SecretAccessKey,
+    sessionToken: params.credentials.SessionToken
   });
 
   // find the target account id
@@ -122,10 +122,10 @@ baseHandler.delete = function(params, callback) {
     trailName: trailName
   };
   if (params.region) input['region'] = params.region;
-  if (params.Credentials) input['creds'] = new AWS.Credentials({
-    accessKeyId: params.Credentials.AccessKeyId,
-    secretAccessKey: params.Credentials.SecretAccessKey,
-    sessionToken: params.Credentials.SessionToken
+  if (params.credentials) input['creds'] = new AWS.Credentials({
+    accessKeyId: params.credentials.AccessKeyId,
+    secretAccessKey: params.credentials.SecretAccessKey,
+    sessionToken: params.credentials.SessionToken
   });
 
   function succeeded(input) { callback(null, {result: true}); }

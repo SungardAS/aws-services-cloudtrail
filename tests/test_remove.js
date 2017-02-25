@@ -1,6 +1,8 @@
 
 /*
 export TRAIL_NAME=Default
+export BUCKET_NAME_POSTFIX=.cloudtrail
+export BUCKET_POLICY_NAME=bucket_cloudtrail_policy
 */
 
 const Credentials = {
@@ -12,14 +14,14 @@ const body = {
   "region": ""
 };
 
-event = {
+var event = {
   "path": "/cloudtrail",
-  "httpMethod": "DELETE",
+  "httpMethod": "POST",
   "headers": {
-    "Credentials": new Buffer(JSON.stringify(Credentials)).toString('base64')
+    "credentials": new Buffer(JSON.stringify(Credentials)).toString('base64')
   },
-  "body": JSON.stringify(body),
-  "resType": "json"
+  "queryStringParameters": null,
+  "body": JSON.stringify(body)
 }
 
 var i = require('../src/index.js');
