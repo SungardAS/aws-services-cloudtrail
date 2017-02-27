@@ -18,7 +18,7 @@ var event = {
   "path": "/cloudtrail",
   "httpMethod": "GET",
   "headers": {
-    "credentials": new Buffer(JSON.stringify(Credentials)).toString('base64')
+    "Credentials": new Buffer(JSON.stringify(Credentials)).toString('base64')
   },
   "queryStringParameters": querystr,
   "body": {
