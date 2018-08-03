@@ -16,7 +16,6 @@ baseHandler.get = function(params, callback) {
     trailName: trailName
   };
   
-  if (params.multiRegion)  input.multiRegion = params.multiRegion;
   if (params.region) input['region'] = params.region;
   if (params.credentials) {
     input['creds'] = new AWS.Credentials({
