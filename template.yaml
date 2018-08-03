@@ -71,8 +71,8 @@ Resources:
       Timeout: 300
       Environment:
         Variables:
-          TRAIL_NAME: "GlobalCloudTrail"
-          BUCKET_NAME_POSTFIX: ".globalcloudtrail"
+          TRAIL_NAME: "Default"
+          BUCKET_NAME_POSTFIX: ".cloudtrail"
           BUCKET_POLICY_NAME: "bucket_cloudtrail_policy"
       Events:
         GetResource:
