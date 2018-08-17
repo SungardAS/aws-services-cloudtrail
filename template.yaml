@@ -72,7 +72,7 @@ Resources:
       Environment:
         Variables:
           TRAIL_NAME: "GlobalCloudTrail"
-          BUCKET_NAME_POSTFIX: ".globalcloudtrail"
+          BUCKET_NAME_POSTFIX: "-globalcloudtrail"
           BUCKET_POLICY_NAME: "bucket_cloudtrail_policy"
       Events:
         GetResource:
