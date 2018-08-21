@@ -73,7 +73,7 @@ baseHandler.post = function(params, callback) {
       var bucketNamePostfix = process.env.BUCKET_NAME_POSTFIX;
       var bucketPolicyName = process.env.BUCKET_POLICY_NAME;
 
-      var bucketName = input.accountId + bucketNamePostfix + "." + params.region;
+      var bucketName = input.accountId + bucketNamePostfix + "-" + params.region;
       var resources = [
         'arn:aws:s3:::' + bucketName,
         'arn:aws:s3:::' + bucketName + '/AWSLogs/' + input.accountId + '/*'];
