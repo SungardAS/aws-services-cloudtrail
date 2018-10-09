@@ -15,7 +15,6 @@ baseHandler.get = function(params, callback) {
   var input = {
     trailName: trailName
   };
-  
   if (params.region) input['region'] = params.region;
   if (params.credentials) {
     input['creds'] = new AWS.Credentials({
@@ -46,7 +45,7 @@ baseHandler.post = function(params, callback) {
   var aws_iam = new (require('aws-services-lib/aws/role.js'))();
 
   var input = {};
-  if (params.multiRegion)  input.multiRegion = params.multiRegion;
+  //if (params.multiRegion)  input.multiRegion = params.multiRegion;
   if (params.region) input['region'] = params.region;
   if (params.credentials) input['creds'] = new AWS.Credentials({
     accessKeyId: params.credentials.AccessKeyId,
